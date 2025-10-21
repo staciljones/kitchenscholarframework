@@ -1,0 +1,448 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kitchen Scholar Framework | Full Framework</title>
+  <meta name="description" content="The full Kitchen Scholar Framework: principles, five-part loop, case example, and engagement options." />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1410;
+      --ink-2: #2c1810;
+      --ink-3: #4a3828;
+      --text: #3d2f24;
+      --muted: #5a4a3d;
+      --gold: #8b6f47;
+      --sand: #e8d5c4;
+      --leaf: #6b8e6b;
+      --bg: #faf8f4;
+      --card: #ffffff;
+      --callout: #f9f4ef;
+      --soft: #f4f1ed;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      width: auto;
+      height: auto;
+      padding: 10px 14px;
+      background: var(--card);
+      border: 2px solid var(--leaf);
+      border-radius: 6px;
+      z-index: 1000;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 60px 80px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--sand);
+    }
+
+    .title {
+      font-size: 42px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.2px;
+    }
+
+    .ksf { color: var(--gold); }
+
+    /* Top nav (anchors) */
+    .topnav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      justify-content: center;
+      margin: 18px 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .topnav a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px dotted transparent;
+      padding-bottom: 2px;
+    }
+    .topnav a:hover { border-bottom-color: var(--ink); }
+
+    /* Shared CTA styles (matches index) */
+    .cta, .back-link a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--ink);
+      background: transparent;
+      transition: background 0.15s ease;
+    }
+    .cta:hover, .back-link a:hover { background: #f6f6f6; }
+    .cta:focus, .back-link a:focus {
+      outline: 3px solid var(--leaf);
+      outline-offset: 2px;
+    }
+
+    .back-link {
+      text-align: center;
+      margin: 22px 0 36px;
+    }
+
+    /* Sections */
+    .section { margin: 48px 0; }
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--sand);
+      scroll-margin-top: 90px; /* for anchor jumps */
+    }
+
+    .subsection-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink-3);
+      margin: 26px 0 12px;
+    }
+
+    .body-text {
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .emphasis-box {
+      background: var(--callout);
+      padding: 24px;
+      border-left: 5px solid var(--gold);
+      margin: 24px 0;
+    }
+    .emphasis-box p { font-size: 17px; color: var(--ink-2); }
+
+    .list-section { margin: 16px 0; }
+    .list-item { margin: 14px 0; padding-left: 28px; position: relative; }
+    .list-item::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .list-item-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 6px;
+    }
+    .list-item-desc { font-size: 15px; color: var(--muted); }
+
+    .principle-card {
+      background: var(--card);
+      padding: 22px;
+      margin: 16px 0;
+      border-left: 4px solid #c99a6e;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .principle-name { font-size: 18px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+    .principle-desc { font-size: 15px; color: var(--muted); }
+
+    .case-study {
+      background: var(--soft);
+      padding: 32px;
+      margin: 28px 0;
+      border-radius: 8px;
+    }
+    .case-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .case-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 14px;
+    }
+    .case-section { margin: 16px 0; }
+    .case-section-title { font-size: 16px; font-weight: 600; color: var(--ink-3); margin-bottom: 6px; }
+    .case-text { font-size: 15px; color: var(--text); }
+
+    .outcome-highlight {
+      background: var(--card);
+      padding: 22px;
+      margin-top: 18px;
+      border-left: 4px solid var(--leaf);
+    }
+    .outcome-title { font-size: 16px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+
+    .origin-section {
+      background: linear-gradient(135deg, var(--ink-2) 0%, var(--ink-3) 100%);
+      color: #fff;
+      padding: 40px;
+      margin: 44px -80px;
+    }
+    .origin-title { font-size: 24px; font-weight: 600; color: #f4e4d4; margin-bottom: 14px; }
+    .origin-text { font-size: 16px; line-height: 1.8; color: #f4e4d4; margin-bottom: 14px; }
+
+    .footer-nav {
+      text-align: center;
+      margin: 36px 0 0;
+    }
+    .footer-nav .sep { margin: 0 8px; color: #9a8; }
+
+    .copyright-notice {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    .copyright-notice p { font-size: 12px; color: #999; line-height: 1.6; margin: 5px 0; }
+
+    @media (max-width: 768px) {
+      .page { padding: 30px 20px; }
+      .title { font-size: 32px; }
+      .section-title { font-size: 24px; }
+      .origin-section { margin: 40px -20px; padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="page">
+    <header class="header">
+      <h1 class="title">Kitchen Scholar Framework <span class="ksf">(KSF)</span></h1>
+
+      <!-- Top anchor nav -->
+      <nav class="topnav" aria-label="Section navigation">
+        <a href="#challenge">Challenge</a> •
+        <a href="#solution">Solution</a> •
+        <a href="#how">How it works</a> •
+        <a href="#principles">Principles</a> •
+        <a href="#case">Case</a> •
+        <a href="#proof">Proof</a> •
+        <a href="#engagements">Engagements</a> •
+        <a href="#origin">Origin</a>
+      </nav>
+    </header>
+
+    <div class="back-link">
+      <a href="index.html" aria-label="Back to overview">← Back to Overview</a>
+    </div>
+
+    <main id="main">
+      <section id="challenge" class="section">
+        <h2 class="section-title">The Challenge</h2>
+        <p class="body-text">
+          Every living system, an ecosystem, a city, a family, shares one essential trait: it knows how to learn. It can sense imbalance, redistribute energy, and adapt without losing coherence.
+        </p>
+        <div class="emphasis-box">
+          <p>
+            Most organizations cannot. They are optimized for efficiency, not understanding. Over time they drift, recycle the same assumptions, and miss insight hiding in plain sight. That drift erodes accuracy, innovation, and trust.
+          </p>
+        </div>
+      </section>
+
+      <section id="solution" class="section">
+        <h2 class="section-title">The Solution: Embedded Reflexivity</h2>
+        <p class="body-text">
+          The Kitchen Scholar Framework (KSF) enacts Embedded Reflexivity, the ability of a system to sense, interpret, and adjust its own behavior in real time. It treats feedback, care, and iteration as design functions, not cultural extras, so that reflection becomes part of the operating system itself.
+        </p>
+        <p class="body-text">
+          Where most frameworks translate human insight into data, KSF restructures systems so they can recognize intelligence as it already exists.
+        </p>
+        <div class="emphasis-box">
+          <p><strong>The result:</strong> systems that think like communities and repair themselves like ecosystems, keeping knowledge, trust, and performance aligned.</p>
+        </div>
+      </section>
+
+      <section id="how" class="section">
+        <h2 class="section-title">How It Works</h2>
+        <p class="body-text">
+          KSF runs on a repeatable five-part loop that turns lived insight into operational intelligence:
+        </p>
+        <div class="list-section">
+          <div class="list-item">
+            <div class="list-item-title">1. Observe</div>
+            <div class="list-item-desc">Map how meaning and data actually move. Notice where sense and signal diverge. Capture informal practices, not only formal metrics.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-title">2. Test</div>
+            <div class="list-item-desc">Run small, real world experiments to surface hidden assumptions. Use tight scopes and short cycles. Document what shifts.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-title">3. Adjust</div>
+            <div class="list-item-desc">Redesign workflows or messages where drift appears. Make the smallest effective change and log the rationale.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-title">4. Share</div>
+            <div class="list-item-desc">Translate discoveries into actionable narratives that circulate across teams and decisions.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-title">5. Preserve</div>
+            <div class="list-item-desc">Create lightweight loops that keep learning active and coherence visible over time.</div>
+          </div>
+        </div>
+        <p class="body-text" style="margin-top: 12px;">
+          Each cycle strengthens <strong>Knowed</strong>, the ethical coherence between what people know, what they do, and what the system learns from them.
+        </p>
+      </section>
+
+      <section id="principles" class="section">
+        <h2 class="section-title">Core Principles</h2>
+        <p class="body-text">
+          KSF rests on four interlocking principles. Each one is a structural translation of how living systems sustain coherence.
+        </p>
+
+        <div class="principle-card">
+          <div class="principle-name">Embedded Reflexivity</div>
+          <div class="principle-desc">Keeps the organization self aware in motion. Reflection is not a meeting, it is a structure that continually senses and corrects drift as work unfolds.</div>
+        </div>
+
+        <div class="principle-card">
+          <div class="principle-name">Amplification over Translation</div>
+          <div class="principle-desc">Relational sensing recognizes lived experience as operational data. Instead of translating people's knowledge into institutional language, KSF amplifies it so systems learn to listen across more dialects of truth. This builds systems where truth, trust, and adaptation reinforce one another.</div>
+        </div>
+
+        <div class="principle-card">
+          <div class="principle-name">Collaborative Knowledge Production</div>
+          <div class="principle-desc">Designs for coherence. It operationalizes collective understanding rather than individual expertise. Coherence emerges when shared meaning flows as smoothly as data.</div>
+        </div>
+
+        <div class="principle-card">
+          <div class="principle-name">Knowed</div>
+          <div class="principle-desc">Coherence as ethical calibration. Knowledge that is felt, trusted, and proportionate to contribution. Systems stay credible when care and recognition move together. When people cannot feel care in how a system acts, they struggle to trust what it claims to know.</div>
+        </div>
+      </section>
+
+      <section id="engagements" class="section">
+        <h2 class="section-title">What It Delivers</h2>
+        <div class="list-section">
+          <div class="list-item"><div class="list-item-desc">Early detection of misalignment and emerging risk</div></div>
+          <div class="list-item"><div class="list-item-desc">Fewer rework cycles and faster, more confident decisions</div></div>
+          <div class="list-item"><div class="list-item-desc">Stronger collaboration and trust across teams</div></div>
+          <div class="list-item"><div class="list-item-desc">Clearer connection between human insight and measurable outcomes</div></div>
+          <div class="list-item"><div class="list-item-desc">Systems that improve continuously without losing their humanity</div></div>
+        </div>
+      </section>
+
+      <section id="case" class="section">
+        <div class="case-study">
+          <div class="case-label">Case Example</div>
+          <div class="case-title">Expanding the "Face" of Sustainability</div>
+
+          <div class="case-section">
+            <div class="case-section-title">Context</div>
+            <p class="case-text">A global technology company asked how its sustainability strategy could better reflect real community practices.</p>
+          </div>
+
+          <div class="case-section">
+            <div class="case-section-title">Challenge</div>
+            <p class="case-text">Its model defined sustainability around access and consumption, efficient yet narrow. It missed everyday systems of reuse, repair, and resourcefulness practiced in its target communities.</p>
+          </div>
+
+          <div class="case-section">
+            <div class="case-section-title">Approach using KSF</div>
+            <div class="list-section">
+              <div class="list-item"><div class="list-item-desc"><strong>Observe:</strong> Mapped how “sustainability” circulated internally and where definitions repeated.</div></div>
+              <div class="list-item"><div class="list-item-desc"><strong>Test:</strong> Partnered with Black, Brown, and Indigenous elders in rural America to document real world sustainability practices.</div></div>
+              <div class="list-item"><div class="list-item-desc"><strong>Adjust:</strong> Amplified those practices into visual and narrative tools that made their logic legible to internal teams.</div></div>
+              <div class="list-item"><div class="list-item-desc"><strong>Share:</strong> Delivered findings directly in product and strategy meetings so reflection became design action.</div></div>
+              <div class="list-item"><div class="list-item-desc"><strong>Preserve:</strong> Left behind processes and a product feature concept that keeps those insights visible during future design work.</div></div>
+            </div>
+          </div>
+
+          <div class="outcome-highlight">
+            <div class="outcome-title">Outcome</div>
+            <p class="case-text">The organization expanded what it could recognize as intelligence. Seeing community resourcefulness as design knowledge improved product relevance, inclusion, and engagement, and it opened new paths for mission aligned innovation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="proof" class="section">
+        <h2 class="section-title">Proof: KSF is Self Verifying</h2>
+        <p class="body-text">
+          KSF did what it was built to do: turn reflection into design infrastructure. When systems are designed to recognize more of the intelligence they depend on, accuracy, ethics, and performance align by design rather than by chance.
+        </p>
+        <div class="list-section">
+          <div class="list-item"><div class="list-item-desc"><strong>Feedback is the metric.</strong> Each cycle produces real time alignment data that shows whether insight is reaching action.</div></div>
+          <div class="list-item"><div class="list-item-desc"><strong>Application reproduces its premise.</strong> Every successful run demonstrates that inclusion sustains accuracy.</div></div>
+          <div class="list-item"><div class="list-item-desc"><strong>Failure triggers redesign, not contradiction.</strong> A missed handoff signals an excluded voice. Correcting it restores coherence.</div></div>
+          <div class="list-item"><div class="list-item-desc"><strong>Empirical coherence equals truth.</strong> When behavior, relationship, and knowledge stay synchronized, performance improves automatically.</div></div>
+        </div>
+      </section>
+
+      <section id="origin" class="origin-section">
+        <h2 class="origin-title">Philosophy of Origin: The Lineage of KSF</h2>
+        <p class="origin-text">
+          KSF began from a simple truth: my grandmother was the smartest person I knowed. Not in the sentimental sense of inherited wisdom, but in the structural sense of intellectual authority. She practiced theory in motion. Her kitchen was a research lab long before I had the language for systems design.
+        </p>
+        <p class="origin-text">
+          She modeled how knowledge circulates, how meaning holds, and how care calibrates truth. Her daily practice, testing, adjusting, sharing, preserving, was a living version of what KSF now formalizes: Embedded Reflexivity as structure, not sentiment.
+        </p>
+        <p class="origin-text">
+          The kitchen is the universal system of coherence. Its purpose, transforming raw material into nourishment, is shared across every culture, but the form, rhythm, and relational structure vary. That adaptability is what keeps it alive.
+        </p>
+        <p class="origin-text">
+          The same is true for organizations. When a system can sense imbalance, redistribute effort, and transform feedback into alignment without losing integrity, it is performing what my grandmother already knew: the work of staying coherent.
+        </p>
+        <p class="origin-text">
+          KSF is that design, translated for modern systems. It carries her epistemology forward, the proof that intellect can live in practice, and that reflection can be infrastructure.
+        </p>
+      </section>
+    </main>
+
+    <div class="back-link">
+      <a href="index.html" aria-label="Back to overview">← Back to Overview</a>
+    </div>
+
+    <footer class="footer-nav" aria-label="Footer navigation">
+      <a class="cta" href="index.html">Overview</a>
+      <span class="sep">•</span>
+      <a class="cta" href="detail.html" aria-current="page">Full framework</a>
+    </footer>
+
+    <div class="copyright-notice">
+      <p>© Kitchen Scholar Framework. Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).</p>
+      <p>Attribution: Staci L. Jones, Hattie Belle Jones, Luvenia McFadden, L. Jenkins, M. J. Lane</p>
+    </div>
+  </div>
+</body>
+</html>
+
+
